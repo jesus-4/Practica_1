@@ -1,31 +1,31 @@
 package dominio;
 
+import exceptions.ExceptionArtista;
+import interfaz.userArtista;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
-public class Artista {
-
+public class Artista implements userArtista {
 	private String nombre;
 	private Calendar fechaNacto;
 	private Calendar fechaMuerte;
 	private Sexo sexo;
 	private int edadTemp;
-	public Artista(String nombre, Calendar fechaNacto, Sexo sexo) throws ExceptionArtista {
-		if (nombre == null)
-			throw new ExceptionArtista("Nombre Nulo");
-		edadTemp=getEdad(fechaNacto);
 
-		if (edadTemp <= 17) {
-			throw new ExceptionArtista("No se permiten artistas menores (17)");
-		}
+	private Artista(String nombre, Calendar fechaNacto, Sexo sexo)  {
+		edadTemp=getEdad(fechaNacto);
 		this.nombre= normalizar(nombre);
 		this.fechaNacto=fechaNacto;
 		this.sexo=sexo;
 	}
 
+	@Override
+	public Artista crearArtist(String nombre, Calendar fechaNacto, Sexo sexo) {
+		return new Artista(nombre, fechaNacto, sexo);
+	}
 
 	@Override
 	public int hashCode() {
@@ -42,7 +42,7 @@ public class Artista {
 		if (getClass() != obj.getClass())
 			return false;
 		Artista other = (Artista) obj;
-		return Objects.equals(fechaNacto, other.fechaNacto) && Objects.equals(nombre, other.nombre)
+		return Objects.equals(nombre, other.nombre)
 				&& sexo == other.sexo;
 	}
 
