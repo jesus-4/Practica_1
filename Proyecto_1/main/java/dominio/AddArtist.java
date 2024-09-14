@@ -1,6 +1,5 @@
 package dominio;
 
-
 public class AddArtist{
 	private ArrayListArtist artist;
 
