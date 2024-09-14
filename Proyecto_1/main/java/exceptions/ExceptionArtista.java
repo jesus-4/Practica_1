@@ -1,4 +1,4 @@
-package dominio;
+package exceptions;
 
 @SuppressWarnings("serial")
 public class ExceptionArtista extends Exception{
