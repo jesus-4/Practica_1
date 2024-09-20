@@ -5,7 +5,7 @@ public class SizeOfArtists{
 	public SizeOfArtists(){
 		artists = new ArrayListArtist();
 	}
-	public int sizeOfArtists(GestorArtista miGestor) {
+	public int sizeOfArtists(GestorArtist miGestor) {
 		return artists.artistsList.size();
 	}
 }

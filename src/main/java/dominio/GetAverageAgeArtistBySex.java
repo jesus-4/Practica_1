@@ -5,7 +5,7 @@ public class GetAverageAgeArtistBySex{
 	public GetAverageAgeArtistBySex(){
 		artists = new ArrayListArtist();
 	}
-	public String getAverageAgeArtistBySex(Sexo s, GestorArtista miGestor) {
+	public String getAverageAgeArtistBySex(Sexo s, GestorArtist miGestor) {
 		if (artists.artistsList.isEmpty()) {
 			String aux = "hay artistas "+ s+"s.";
 			return "No " + aux.toLowerCase() ;

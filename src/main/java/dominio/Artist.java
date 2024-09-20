@@ -1,6 +1,10 @@
 package dominio;
 
+import exceptions.ExceptionArtist;
+
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Artist  {
@@ -8,12 +12,17 @@ public class Artist  {
 	private LocalDate fechaNacto;
 	private Sexo sexo;
 
-	public Artist(String nombre, LocalDate fechaNacto, Sexo sexo)  {
+	private Artist(String nombre, LocalDate fechaNacto, Sexo sexo)  {
 		this.nombre= normalizar(nombre);
 		this.fechaNacto=fechaNacto;
 		this.sexo=sexo;
 	}
-	public static Artist InstanceOfArtista(String nombre, LocalDate fechaNacto, Sexo sexo) {
+	public static Artist InstanceOfArtista(String nombre, LocalDate fechaNacto, Sexo sexo) throws ExceptionArtist {
+		if (nombre.isEmpty()){
+			throw new ExceptionArtist("No se ha encontrado el nombre");
+		}if (fechaNacto == null){
+			throw new ExceptionArtist("No se ha encontrado la fecha de nacimiento");
+		}
 		return new Artist(nombre, fechaNacto, sexo);
 	}
 
@@ -51,11 +60,24 @@ public class Artist  {
 	public Sexo getSexo() {
 		return sexo;
 	}
+
+	public String getFechaCorta() {
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yy");
+		return fechaNacto.format(formato);
+	}
+
 	public int getEdad(){
-		return 0;
+		return Period.between(this.fechaNacto, LocalDate.now()).getYears();
 	}
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
+	}
+	@Override
+	public String toString() {
+		if (sexo == Sexo.Masculino) {
+			return "El Artista: "+ nombre+ " ("+ getFechaCorta()+")";
+		}
+		return "La Artista: "+ nombre+ " ("+ getFechaCorta()+")";
 	}
 
 	public String normalizar(String nombre) {

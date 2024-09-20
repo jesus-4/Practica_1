@@ -3,7 +3,7 @@ import interfaz.interfazGestor;
 
 import java.util.ArrayList;
 
-abstract class GestorArtista implements interfazGestor {
+abstract class GestorArtist implements interfazGestor {
 	private ArrayList<Artist> artists;
     private AddArtist addArtist;
 	private ClearArtists clearArtists;
